@@ -10,18 +10,16 @@ for i in range(1,10000):
         continue
     soup=BeautifulSoup(strhtml.text,'lxml')
     data1 = soup.select('div.content1>h1')
-    data2 = soup.select('div.main_left>div.mainleft_box')
-    if len(data1)>0:
-        f.write(data1[0].get_text())
-    f.write('    '+url+str(i))    
+    data2 = soup.select('div.main_left>div.mainleft_box')   
     first = True
-    for i in data2:
-        if i.get_text().find('研究方向') != -1:
+    for j in data2:
+        if j.get_text().find('研究方向') != -1:
             if first:
                 if len(data1)>0:
-                    f.write(data1[0].get_text()+'    '+url+str(i))
+                    f.write(data1[0].get_text())
+                    f.write('    '+url+str(i)+'\n')
                     first = False
-            f.write(i.get_text())
+            f.write(j.get_text())
     f.write('\n\n\n')
 print('finish')
 
